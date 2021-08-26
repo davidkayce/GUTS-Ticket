@@ -48,12 +48,17 @@
     </section>
     <article>
       <div class="card">
-        <div class="card-header">Properties</div>
+        <h3>Properties</h3>
         <div class="card-body">
           <ul class="list-group">
+            <li class="list-group-item"><span class="group one" /> Group 1</li>
+            <li class="list-group-item"><span class="group two" /> Group 2</li>
             <li class="list-group-item">
-              
+              <span class="group three" /> Group 3
             </li>
+            <li class="list-group-item"><span class="rank one" /> Rank 1</li>
+            <li class="list-group-item"><span class="rank two" /> Rank 2</li>
+            <li class="list-group-item"><span class="rank three" /> Rank 3</li>
           </ul>
         </div>
       </div>
@@ -84,40 +89,16 @@ export default defineComponent({
         for (let j = 0, row; (row = section.rows[j++]); ) {
           buffer[section.name][j] = [];
           for (let k = 0, seat; (seat = row.seats[k++]); ) {
-            buffer[section.name][j].push({
-              rank: seat.rank,
-            });
+            buffer[section.name][j][+seat.seat -1] = { rank: seat.rank };
           }
         }
       }
     };
-
+    
     const allocateSeats = () => {
       for (let a = 0, group; (group = groups[a++]); ) {
         for (let b = 0, seat; (seat = group.seats[b++]); ) {
-
-          // Find the seat in the layout
-          for (let c = 0, section; (section = layout.sections[c++]); ) {
-            if (section.name === seat.section) {
-              for (let c = 0, layout; (layout = section.rows[c++]); ) {
-
-                if (layout.row === seat.row) {
-                  for (
-                    let d = 0, layoutSeat;
-                    (layoutSeat = layout.seats[d++]);
-                  ) {
-
-                    if (layoutSeat.seat === seat.seat) {
-                      buffer[section.name][+seat.row][+seat.seat -1] = {
-                        id: group.id,
-                        rank: layoutSeat.rank,
-                      };
-                    }
-                  }
-                }
-              }
-            }
-          }
+          buffer[seat.section][+seat.row][+seat.seat - 1]['id'] = group.id;
         }
       }
     };
@@ -131,7 +112,6 @@ export default defineComponent({
       drawSeats();
       allocateSeats();
       allocation.value = buffer;
-      console.log(buffer);
     });
 
     return {
@@ -144,28 +124,4 @@ export default defineComponent({
 
 <style lang="scss">
 @import "./styles/main.scss";
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
-
-  & > hr {
-    margin-right: 0;
-    margin-left: 0;
-  }
-}
-.card > .list-group:first-child .list-group-item:first-child {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-}
-.card > .list-group:last-child .list-group-item:last-child {
-  border-bottom-right-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-}
 </style>

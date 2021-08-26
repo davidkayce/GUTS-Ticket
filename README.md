@@ -1,30 +1,38 @@
 # GUTS Ticket Theater Layout
 
-This project is a Vue application, setup using [Vite](https://vitejs.dev). It sorts through data given to display a layout of seats in a theater according to the sections. The project requirment can be found [here](https://github.com/davidkayce/GUTS-Ticket/)
+![Theater](https://github.com/davidkayce/GUTS-Ticket/blob/master/theater.png)
 
-## Instrtuctions:
+This project is a Vue application, setup using [Vite](https://vitejs.dev). It sorts through data given to display a layout of seats in a theater according to the sections. The project requirment can be found [here](https://github.com/davidkayce/GUTS-Ticket/requirement.pdf)
+
+## Instructions:
 
 To setup the application, run the following commands on your terminal: 
 
 - `yarn`or `npm i`to install all dependencies
 - `yarn dev` or `npm run dev` to start up the development server
 
-### If Using `<script setup>`
+## Walkthrough and considerations:
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+The application can be divided in two:
 
-## Type Support For `.vue` Imports in TS
+- Logic to filter the data and arrange it in an easily presentable manner. 
+  For this, it was important to pay attention to the performance of the functions and the memory use. For this, a modification of the `for...loop` was used with look up within the loop, this has been stated to be the most efficent `for..loop`implementation as there is very overhead in array lookup. Using this also allows one to write more readable than a conventional `for..loop` would permit
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+  The `drawSeats` function takes in the layout and creates a two dimensional matrix for each section with the seat ranking
 
-### If Using Volar
+       `main hall` :       seats
+                     rows  rank1 rank2 ... 
+                           rank2 rank1 ...
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+  The `allocateSeats`function then takes in the group data and for each seat, it confirms it's position on the layout and walks over the matrix created in `drawSeats`, adding the group id where necessary.
 
-### If Using Vetur
+- Frontend to view the layout
+  For this, svg seats are manipulated on a table, and the `fill`and `stroke`css properties are updated depending on the rank and id in the matrix element
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+### Considerations and further work
+
+A common method to scale working with complex data would be to using webowrkers, however they are not always applicable to all tasks especially considering the inefficencies of message passing between workers. In this case, I tested the sorting algorithm with 1,000,000 groups using 3 workers vs a single thread: performance gains were little and inconsistent, in more cases, the single thread performed better and so no workers are included in the finished work.
+
+Further work would be checking to ensure that all seats in a group are within the same rank. From the question and in practice, this would normally be enforced in the data but it could also be considered in the application.
+
+

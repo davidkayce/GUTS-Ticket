@@ -1,0 +1,68 @@
+.card {
+  position: sticky;
+  word-wrap: break-word;
+  background-color: #fff;
+  border: 2px solid #c9d6e2;
+  border-radius: 10px;
+  padding: 0 1rem 1rem;
+  min-width: 200px;
+
+  .list-group {
+    padding-inline-start: 0;
+
+    li {
+      background: #f1f6fa;
+      list-style: none;
+      padding: 0.5rem;
+      border: 1.5px solid rgba(201, 214, 226, 0.3);
+
+      &:first-of-type {
+        padding-top: 0.75rem;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+      }
+
+      &:last-of-type {
+        padding-bottom: 0.75rem;
+        border-bottom-right-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+      }
+
+      span {
+        display: inline-block;
+        margin-right: 20px;
+      }
+    }
+
+    .group {
+      width: 40px;
+      border: 1px solid;
+
+      &.one {
+        border-color: black;
+      }
+      &.two {
+        border-color: purple;
+      }
+      &.three {
+        border-color: green;
+      }
+    }
+
+    .rank {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+
+      &.one {
+        background-color: rgb(184, 184, 184);;
+      }
+      &.two {
+        background-color: rgb(180, 195, 240);
+      }
+      &.three {
+        background-color: goldenrod;
+      }
+    }
+  }
+}
