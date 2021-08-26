@@ -1,0 +1,35 @@
+.seats-container {
+  margin: auto;
+
+  td {
+    transform: rotate(90deg);
+    width: 50px;
+  } 
+
+  .seat { 
+    stroke: rgb(207, 206, 206);
+    stroke-miterlimit: 10;
+
+    &.group1 {
+      stroke: black
+    }
+
+    &.group2 {
+      stroke: purple
+    }
+
+    &.group3 {
+      stroke: green
+    }
+
+    &.rank1 {
+      fill: rgb(184, 184, 184);
+    }
+    &.rank2 {
+      fill: rgb(180, 195, 240);
+    }
+    &.rank3 {
+      fill: goldenrod;
+    }
+  }
+}

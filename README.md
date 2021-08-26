@@ -1,10 +1,13 @@
-# Vue 3 + Typescript + Vite
+# GUTS Ticket Theater Layout
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+This project is a Vue application, setup using [Vite](https://vitejs.dev). It sorts through data given to display a layout of seats in a theater according to the sections. The project requirment can be found [here](https://github.com/davidkayce/GUTS-Ticket/)
 
-## Recommended IDE Setup
+## Instrtuctions:
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+To setup the application, run the following commands on your terminal: 
+
+- `yarn`or `npm i`to install all dependencies
+- `yarn dev` or `npm run dev` to start up the development server
 
 ### If Using `<script setup>`
 
