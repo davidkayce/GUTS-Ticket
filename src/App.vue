@@ -12,6 +12,7 @@
             v-for="(row, rowIndex) in value"
             :key="rowIndex"
             class="seats-row"
+            data-test="seats-row" 
           >
             <td v-for="(seat, seatIndex) in row" :key="seatIndex">
               <svg
@@ -70,11 +71,11 @@
 import { ref, onMounted } from "vue";
 import { defineComponent } from "vue";
 import { layout, groups } from "./data";
+import { Layout, Group } from "./types"
 
 export default defineComponent({
   name: "App",
   setup() {
-    const buffer = {} as any;
     const allocation = ref<any>({});
 
     const idMap = {
@@ -83,8 +84,10 @@ export default defineComponent({
       "+31633333333": "group3",
     };
 
-    const drawSeats = () => {
-      for (let i = 0, section; (section = layout.sections[i++]); ) {
+    const drawSeats = (layoutData: Layout) => {
+      const buffer = {} as any;
+
+      for (let i = 0, section; (section = layoutData.sections[i++]); ) {
         buffer[section.name] = [];
         for (let j = 0, row; (row = section.rows[j++]); ) {
           buffer[section.name][j] = [];
@@ -93,14 +96,17 @@ export default defineComponent({
           }
         }
       }
+
+      return buffer;
     };
     
-    const allocateSeats = () => {
-      for (let a = 0, group; (group = groups[a++]); ) {
+    const allocateSeats = (groupData: Group, layoutMatrix: any): any => {
+      for (let a = 0, group; (group = groupData[a++]); ) {
         for (let b = 0, seat; (seat = group.seats[b++]); ) {
-          buffer[seat.section][+seat.row][+seat.seat - 1]['id'] = group.id;
+          layoutMatrix[seat.section][+seat.row][+seat.seat - 1]['id'] = group.id;
         }
       }
+      return layoutMatrix;
     };
 
     const classifier = (id: string, rank: number): string => {
@@ -109,14 +115,16 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      drawSeats();
-      allocateSeats();
-      allocation.value = buffer;
+      const result = drawSeats(layout);
+      const allocatedSeats = allocateSeats(groups, result);
+      allocation.value = allocatedSeats;
     });
 
     return {
       allocation,
       classifier,
+      drawSeats,
+      allocateSeats
     };
   },
 });

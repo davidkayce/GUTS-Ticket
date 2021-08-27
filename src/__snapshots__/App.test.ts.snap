@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Theater application should render content correctly 1`] = `
+<section
+  class="theater"
+>
+  <section>
+    
+    
+  </section>
+  <article>
+    <div
+      class="card"
+    >
+      <h3>
+        Properties
+      </h3>
+      <div
+        class="card-body"
+      >
+        <ul
+          class="list-group"
+        >
+          <li
+            class="list-group-item"
+          >
+            <span
+              class="group one"
+            />
+             Group 1
+          </li>
+          <li
+            class="list-group-item"
+          >
+            <span
+              class="group two"
+            />
+             Group 2
+          </li>
+          <li
+            class="list-group-item"
+          >
+            <span
+              class="group three"
+            />
+             Group 3 
+          </li>
+          <li
+            class="list-group-item"
+          >
+            <span
+              class="rank one"
+            />
+             Rank 1
+          </li>
+          <li
+            class="list-group-item"
+          >
+            <span
+              class="rank two"
+            />
+             Rank 2
+          </li>
+          <li
+            class="list-group-item"
+          >
+            <span
+              class="rank three"
+            />
+             Rank 3
+          </li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</section>
+`;
