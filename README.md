@@ -1,8 +1,8 @@
-# GUTS Ticket Theater Layout
+# Ticket Theater Layout
 
 ![Theater](https://github.com/davidkayce/GUTS-Ticket/blob/main/theater.png)
 
-This project is a Vue application, setup using [Vite](https://vitejs.dev). It sorts through data given to display a layout of seats in a theater according to the sections. The project requirment can be found [here](https://github.com/davidkayce/GUTS-Ticket/blob/main/requirement.pdf)
+This project is a Vue application, setup using [Vite](https://vitejs.dev). It sorts through data given to display a layout of seats in a theater according to the sections. The project requirment can be found [here](https://github.com/davidkayce/Seating/blob/main/requirement.pdf)
 
 ## Instructions:
 
